@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.xunam.passwordgenerator"
+    namespace = "com.xoksync.passwordgenerator"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.xunam.passwordgenerator"
+        applicationId = "com.xoksync.passwordgenerator"
         minSdk = 23
         targetSdk = 34
         versionCode = 1
