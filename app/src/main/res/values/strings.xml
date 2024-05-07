@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Password Generator</string>
+    <string name="checkbox_lowercase">a-z</string>
+    <string name="checkbox_uppercase">A-Z</string>
+    <string name="checkbox_numbers">0-9</string>
+    <string name="checkbox_symbols"><![CDATA[!@#$%^&*]]></string>
+    <string name="textview_additional_options">Additional Options</string>
+    <string name="textview_password_length">Length: </string>
+    <string name="button_regenerate">Regenerate</string>
+    <string name="button_copy_password">Copy</string>
+</resources>
