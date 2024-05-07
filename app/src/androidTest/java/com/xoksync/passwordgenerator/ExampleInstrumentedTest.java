@@ -1,4 +1,4 @@
-package com.xunam.passwordgenerator;
+package com.xoksync.passwordgenerator;
 
 import android.content.Context;
 
@@ -15,6 +15,6 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.xunam.passwordgenerator", appContext.getPackageName());
+        assertEquals("com.xoksync.passwordgenerator", appContext.getPackageName());
     }
 }

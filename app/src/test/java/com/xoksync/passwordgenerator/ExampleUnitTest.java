@@ -1,4 +1,4 @@
-package com.xunam.passwordgenerator;
+package com.xoksync.passwordgenerator;
 
 import org.junit.Test;
 

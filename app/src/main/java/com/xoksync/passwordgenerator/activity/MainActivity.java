@@ -1,4 +1,4 @@
-package com.xunam.passwordgenerator.activity;
+package com.xoksync.passwordgenerator.activity;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -13,13 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.xunam.passwordgenerator.R;
+import com.xoksync.passwordgenerator.R;
 
 import java.util.Random;
 
