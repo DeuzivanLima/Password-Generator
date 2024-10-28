@@ -1,4 +1,4 @@
-package com.xoksync.passwordgenerator.activity;
+package io.github.deuzivanlima.passwordgenerator.activity;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -17,10 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.xoksync.passwordgenerator.R;
-
-import java.util.Random;
+import io.github.deuzivanlima.passwordgenerator.R;
+import java.security.SecureRandom;
 
 public class MainActivity extends AppCompatActivity {
     private SeekBar seekbar_password_length;
@@ -135,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if(checkbox_numbers.isChecked()) {
             ascii_to_use += "0123456789";
         }
-        if(checkbox_numbers.isChecked()) {
+        if(checkbox_symbols.isChecked()) {
             ascii_to_use += "!@#$%^&*";
         }
 
@@ -143,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         char[] buffer = new char[password_length];
         int bound = ascii_to_use.length();
-        Random rand = new Random(System.currentTimeMillis());
+        SecureRandom rand = new SecureRandom();
 
         for(int i = 0; i < password_length; i++) {
             int index = rand.nextInt(bound);
@@ -154,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String mixString(String text) {
-        Random rand = new Random(System.currentTimeMillis());
+        SecureRandom rand = new SecureRandom();
         char[] text_array = text.toCharArray();
 
         for(int i = 0; i < text.length(); i++) {

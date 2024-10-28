@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.xoksync.passwordgenerator"
+    namespace = "io.github.deuzivanlima.passwordgenerator"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.xoksync.passwordgenerator"
+        applicationId = "io.github.deuzivanlima.passwordgenerator"
         minSdk = 23
         targetSdk = 34
         versionCode = 1
