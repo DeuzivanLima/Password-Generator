@@ -8,4 +8,10 @@
     <string name="textview_password_length">Length: </string>
     <string name="button_regenerate">Regenerate</string>
     <string name="button_copy_password">Copy</string>
+    <string name="_512">512</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="_1028">1028</string>
+    <string name="_128">128</string>
+    <string name="password_result">Password result...</string>
 </resources>

@@ -3,6 +3,7 @@ package io.github.deuzivanlima.passwordgenerator.activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,14 +19,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import io.github.deuzivanlima.passwordgenerator.R;
-import java.security.SecureRandom;
+import io.github.deuzivanlima.passwordgenerator.core.RandomString;
+
 
 public class MainActivity extends AppCompatActivity {
     private SeekBar seekbar_password_length;
     private TextView textview_password_length;
     private CheckBox checkbox_uppercase, checkbox_lowercase, checkbox_numbers, checkbox_symbols;
     private EditText edittext_password_result;
-    private Button button_regenerate, button_copy;
+    private Button button_regenerate, button_copy, button_increment_length, button_decrement_length, button_128, button_512, button_1028;
     int password_length = 8;
 
     @Override
@@ -38,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         findAllView();
         setPasswordLength(password_length);
-        checkboxEvent();
+        updateSeekbar();
         updatePasswordLength();
         buttonsEvent();
     }
@@ -55,13 +58,79 @@ public class MainActivity extends AppCompatActivity {
         edittext_password_result = findViewById(R.id.edittext_password_result);
         button_regenerate = findViewById(R.id.button_regenerate);
         button_copy = findViewById(R.id.button_copy);
+        button_128 = findViewById(R.id.button_increment_128);
+        button_512 = findViewById(R.id.button_increment_512);
+        button_1028 = findViewById(R.id.button_increment_1028);
+        button_increment_length = findViewById(R.id.button_increment_length);
+        button_decrement_length = findViewById(R.id.button_decrement_length);
     }
 
+    private void updateSeekbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            seekbar_password_length.setProgress(password_length, true);
+        } else {
+            seekbar_password_length.setProgress(password_length);
+        }
+    }
+
+
     private void buttonsEvent() {
+        checkbox_lowercase.setChecked(true);
+
+        button_128.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPasswordLength(128);
+                updateSeekbar();
+                generatePassword();
+            }
+        });
+
+        button_512.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPasswordLength(512);
+                updateSeekbar();
+                generatePassword();
+            }
+        });
+
+        button_1028.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPasswordLength(1028);
+                updateSeekbar();
+                generatePassword();
+            }
+        });
+
+        button_increment_length.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(password_length < seekbar_password_length.getMax()) {
+                    setPasswordLength(password_length + 1);
+                    updateSeekbar();
+                    generatePassword();
+                }
+            }
+        });
+
+        button_decrement_length.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(password_length > 1)
+                {
+                    setPasswordLength(password_length - 1);
+                    updateSeekbar();
+                    generatePassword();
+                }
+            }
+        });
+
         button_regenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                regeneratePassword();
+                generatePassword();
             }
         });
 
@@ -72,28 +141,24 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!content.isEmpty()) {
                     ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("password generator", content);
+                    ClipData clip = ClipData.newPlainText("Password Generator", content);
 
                     clipboard.setPrimaryClip(clip);
 
-                    Toast.makeText(MainActivity.this, "Copied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Successfully Copied!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void checkboxEvent() {
-        checkbox_lowercase.setChecked(true);
-    }
-
     private void updatePasswordLength() {
-        seekbar_password_length.setMax(256);
+        seekbar_password_length.setMax(1028);
 
         seekbar_password_length.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 setPasswordLength(progress);
-                regeneratePassword();
+                generatePassword();
             }
 
             @Override
@@ -111,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
         textview_password_length.setText(String.format("%s %s", getResources().getText(R.string.textview_password_length), String.valueOf(password_length)));
     }
 
-    private void regeneratePassword() {
+    private void generatePassword() {
         if(password_length != 0 && (checkbox_lowercase.isChecked() || checkbox_uppercase.isChecked() || checkbox_numbers.isChecked() || checkbox_symbols.isChecked())) {
-            edittext_password_result.setText(generatePassword());
+            edittext_password_result.setText(generateString());
         } else if (password_length == 0) {
             edittext_password_result.setText("Nothing to generate with 0 length...");
         } else {
@@ -121,50 +186,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String generatePassword() {
-        String ascii_to_use = "";
+    private String generateString() {
+        RandomString random_string = new RandomString(password_length);
 
-        if(checkbox_uppercase.isChecked()) {
-            ascii_to_use += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        }
-        if(checkbox_lowercase.isChecked()) {
-            ascii_to_use += "abcdefghijklmnopqrstuvwxyz";
-        }
-        if(checkbox_numbers.isChecked()) {
-            ascii_to_use += "0123456789";
-        }
-        if(checkbox_symbols.isChecked()) {
-            ascii_to_use += "!@#$%^&*";
-        }
-
-        ascii_to_use = mixString(ascii_to_use);
-
-        char[] buffer = new char[password_length];
-        int bound = ascii_to_use.length();
-        SecureRandom rand = new SecureRandom();
-
-        for(int i = 0; i < password_length; i++) {
-            int index = rand.nextInt(bound);
-            buffer[i] = ascii_to_use.charAt(index);
-        }
-
-        return new String(buffer);
-    }
-
-    private String mixString(String text) {
-        SecureRandom rand = new SecureRandom();
-        char[] text_array = text.toCharArray();
-
-        for(int i = 0; i < text.length(); i++) {
-            int index = rand.nextInt(text.length());
-            while(index == i) {
-                index = rand.nextInt(text.length());
-            }
-            char buffer = text_array[i];
-            text_array[i] = text_array[index];
-            text_array[index] = buffer;
-        }
-
-        return new String(text_array);
+        return random_string.generate(
+                checkbox_lowercase.isChecked(),
+                checkbox_numbers.isChecked(),
+                checkbox_symbols.isChecked(),
+                checkbox_uppercase.isChecked()
+        );
     }
 }

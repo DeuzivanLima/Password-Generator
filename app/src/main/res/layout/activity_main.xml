@@ -26,20 +26,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:gravity="top"
+        android:inputType="none"
+        android:autofillHints="password"
         android:ems="10"
-        android:inputType="textMultiLine"
+        android:hint="@string/password_result"
         android:maxLines="10"
+        android:textColor="@color/white"
+        android:padding="8dp"
         android:minLines="10"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor,TextFields" />
 
     <Button
         android:id="@+id/button_regenerate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background"
         android:text="@string/button_regenerate"
+        app:layout_constraintBottom_toTopOf="@+id/button_copy"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/edittext_password_result" />
@@ -49,6 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button_background"
         android:text="@string/button_copy_password"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -69,6 +80,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textview_password_length" />
@@ -84,6 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/seekbar_password_length" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -95,6 +109,8 @@
             android:id="@+id/checkbox_lowercase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
             android:text="@string/checkbox_lowercase" />
 
         <CheckBox
@@ -118,5 +134,71 @@
             android:layout_weight="1"
             android:text="@string/checkbox_symbols" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_increment_1028"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_background"
+        android:text="@string/_1028"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_increment_512" />
+
+    <Button
+        android:id="@+id/button_increment_128"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_background"
+        android:text="@string/_128"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_increment_512"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/button_increment_512"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_background"
+        android:text="@string/_512"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_increment_1028"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_increment_128" />
+
+    <Button
+        android:id="@+id/button_increment_length"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="@string/plus"
+        app:layout_constraintBottom_toTopOf="@+id/button_increment_1028"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_decrement_length" />
+
+    <Button
+        android:id="@+id/button_decrement_length"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="@string/minus"
+        app:layout_constraintBottom_toTopOf="@+id/button_increment_128"
+        app:layout_constraintEnd_toStartOf="@+id/button_increment_length"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

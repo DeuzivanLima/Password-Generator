@@ -1,16 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.PasswordGenerator" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <item name="colorPrimary">@color/material_dynamic_neutral_variant90</item>
-        <item name="colorSecondary">@color/material_dynamic_secondary40</item>
-        <item name="colorOnPrimary">@color/material_dynamic_neutral20</item>
-        <item name="colorAccent">@color/material_dynamic_neutral40</item>
-        <item name="android:buttonTint">@color/material_dynamic_neutral70</item>
-        <item name="colorOnSurface">@color/material_dynamic_neutral50</item>
-        <item name="android:textCheckMark">@color/material_dynamic_neutral50</item>
-        <item name="android:textColor">@color/material_dynamic_neutral80</item>
-        <item name="android:windowBackground">@color/background_color</item>
-        <item name="android:textColorPrimaryDisableOnly">@color/material_dynamic_neutral70</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorOnPrimary">@color/dark</item>
+
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:windowBackground">@color/dark</item>
+
+        <item name="colorAccent">@color/white</item>
     </style>
 </resources>
